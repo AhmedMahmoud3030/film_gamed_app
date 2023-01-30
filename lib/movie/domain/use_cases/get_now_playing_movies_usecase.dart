@@ -8,10 +8,7 @@ class GetNowPlayingUseCase{
 final BaseMovieRepository baseMovieRepository;
 
   GetNowPlayingUseCase(this.baseMovieRepository);
-/*
-*      git config --global user.email "ahmed.elbeah@icloud.com"
-*
-* */
+
 
 Future<Either<Failure, List<Movie>>> execute() async{
     return await baseMovieRepository.getNowPlayingMovies();
