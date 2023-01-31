@@ -4,12 +4,16 @@ import 'package:film_gamed_app/movie/domain/repositories/base_movie_repository.d
 import 'package:film_gamed_app/movie/domain/use_cases/get_now_playing_movies_usecase.dart';
 import 'package:film_gamed_app/movie/domain/use_cases/get_popular_movies_usecase.dart';
 import 'package:film_gamed_app/movie/domain/use_cases/get_top_rated_movies_usecase.dart';
+import 'package:film_gamed_app/movie/presentation/manager/movies_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
 class ServiceLocator {
   void init() {
+    //*Bloc
+    sl.registerFactory(() => MoviesBloc(sl(), sl(), sl()));
+
     //* UseCases
     sl.registerLazySingleton(() => GetNowPlayingUseCase(sl()));
     sl.registerLazySingleton(() => GetPopularMoviesUseCase(sl()));
