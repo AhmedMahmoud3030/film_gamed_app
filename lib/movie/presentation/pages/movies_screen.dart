@@ -10,7 +10,6 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../core/network/api_constance.dart';
 import '../../../core/services/services_locator.dart';
-import '../../../core/utils/dummy.dart';
 import '../widgets/now-playing_widget.dart';
 import '../widgets/popular_widget.dart';
 import '../widgets/toprated_widget.dart';
