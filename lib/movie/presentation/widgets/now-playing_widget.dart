@@ -1,4 +1,5 @@
 import 'package:film_gamed_app/movie/presentation/manager/movies_bloc.dart';
+import 'package:film_gamed_app/movie/presentation/pages/movie_detail_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -43,7 +44,12 @@ class NowPlayingWidget extends StatelessWidget {
                     return GestureDetector(
                       key: const Key('openMovieMinimalDetail'),
                       onTap: () {
-                        /// TODO : NAVIGATE TO MOVIE DETAILS
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MovieDetailScreen(id: item.id),
+                            ));
                       },
                       child: Stack(
                         children: [

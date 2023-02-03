@@ -6,17 +6,17 @@ class MovieDetail extends Equatable {
   final List<Genres> genres;
   final int id;
   final String overview;
-  final String releaseData;
-  final int runTime;
+  final String releaseDate;
+  final int runtime;
   final String title;
-  final String voteAverage;
+  final double voteAverage;
 
   const MovieDetail({
     required this.backdropPath,
     required this.id,
     required this.overview,
-    required this.releaseData,
-    required this.runTime,
+    required this.releaseDate,
+    required this.runtime,
     required this.title,
     required this.voteAverage,
     required this.genres,
@@ -28,8 +28,8 @@ class MovieDetail extends Equatable {
         backdropPath,
         id,
         overview,
-        releaseData,
-        runtimeType,
+        releaseDate,
+        runtime,
         title,
         voteAverage,
       ];

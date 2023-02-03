@@ -1,14 +1,10 @@
+import 'package:film_gamed_app/core/utils/app_string.dart';
 import 'package:film_gamed_app/movie/presentation/manager/movies_bloc.dart';
 import 'package:film_gamed_app/movie/presentation/manager/movies_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:animate_do/animate_do.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shimmer/shimmer.dart';
 
-import '../../../core/network/api_constance.dart';
 import '../../../core/services/services_locator.dart';
 import '../widgets/now-playing_widget.dart';
 import '../widgets/popular_widget.dart';
@@ -37,7 +33,7 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Popular",
+                      AppString.popular,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -52,7 +48,7 @@ class MoviesScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: const [
-                            Text('See More'),
+                            Text(AppString.seeMore),
                             Icon(
                               Icons.arrow_forward_ios,
                               size: 16.0,
@@ -76,7 +72,7 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Top Rated",
+                      AppString.topRated,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -91,7 +87,7 @@ class MoviesScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: const [
-                            Text('See More'),
+                            Text(AppString.seeMore),
                             Icon(
                               Icons.arrow_forward_ios,
                               size: 16.0,

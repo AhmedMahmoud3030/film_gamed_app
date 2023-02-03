@@ -6,8 +6,8 @@ class MovieDetailModel extends MovieDetail {
     required super.backdropPath,
     required super.id,
     required super.overview,
-    required super.releaseData,
-    required super.runTime,
+    required super.releaseDate,
+    required super.runtime,
     required super.title,
     required super.voteAverage,
     required super.genres,
@@ -18,10 +18,10 @@ class MovieDetailModel extends MovieDetail {
           backdropPath: json['backdrop_path'],
           id: json['id'],
           overview: json['overview'],
-          releaseData: json['release_date'],
-          runTime: json['runtime'],
+          releaseDate: json['release_date'],
+          runtime: json['runtime'],
           title: json['title'],
-          voteAverage: json['vote_average'],
+          voteAverage: json['vote_average'].toDouble(),
           genres: List<GenresModel>.from(
               json['genres'].map((x) => GenresModel.fromJson(x))));
 }
