@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, avoid_renaming_method_parameters
+
 import 'package:dio/dio.dart';
 import 'package:film_gamed_app/core/error/exceptions.dart';
 import 'package:film_gamed_app/core/network/api_constance.dart';
@@ -67,7 +69,6 @@ class TVRemoteDataSource extends BaseTVRemoteDataSource {
       TVDetailParameters tvDetailParameters) async {
     final response = await Dio().get(
         ApiConstance.tvDetail(tvDetailParameters.tvId) + ApiConstance.apiKey);
-    print('TV=${response.data}');
     if (response.statusCode == 200) {
       return TVDetailModel.fromJson(response.data);
     } else {

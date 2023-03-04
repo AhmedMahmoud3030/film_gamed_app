@@ -70,7 +70,6 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
         ApiConstance.movieDetail(movieDetailParameters.movieId) +
             ApiConstance.apiKey);
     if (response.statusCode == 200) {
-      print('Movie=${response.data}');
       return MovieDetailModel.fromJson(response.data);
     } else {
       throw ServerException(

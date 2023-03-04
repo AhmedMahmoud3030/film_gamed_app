@@ -9,7 +9,6 @@ import '../../../../core/network/api_constance.dart';
 import '../../../../core/services/services_locator.dart';
 import '../../../../core/utils/app_string.dart';
 import '../../../../core/utils/enums.dart';
-import '../../domain/entities/generes.dart';
 import '../manager/tv_detail_bloc.dart';
 
 class TVDetailScreen extends StatelessWidget {
@@ -213,18 +212,18 @@ class TVDetailContent extends StatelessWidget {
     );
   }
 
-  String _showGenres(List<GenresTV> genres) {
-    String result = '';
-    for (var genre in genres) {
-      result += '${genre.name}, ';
-    }
+  // String _showGenres(List<GenresTV> genres) {
+  //   String result = '';
+  //   for (var genre in genres) {
+  //     result += '${genre.name}, ';
+  //   }
 
-    if (result.isEmpty) {
-      return result;
-    }
+  //   if (result.isEmpty) {
+  //     return result;
+  //   }
 
-    return result.substring(0, result.length - 2);
-  }
+  //   return result.substring(0, result.length - 2);
+  // }
 
   String _showDuration(int runtime) {
     final int hours = runtime ~/ 60;

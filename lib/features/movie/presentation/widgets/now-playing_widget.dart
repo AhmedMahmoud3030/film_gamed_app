@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
