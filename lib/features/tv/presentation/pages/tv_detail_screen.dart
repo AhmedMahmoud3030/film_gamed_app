@@ -1,28 +1,27 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film_gamed_app/features/tv/presentation/manager/tv_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:simple_icons/simple_icons.dart';
 
 import '../../../../core/network/api_constance.dart';
 import '../../../../core/services/services_locator.dart';
 import '../../../../core/utils/app_string.dart';
 import '../../../../core/utils/enums.dart';
+import '../manager/tv_detail_bloc.dart';
 
 class TVDetailScreen extends StatelessWidget {
   final int id;
 
-  const TVDetailScreen({required this.id});
+  const TVDetailScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<TVDetailBloc>()
-        ..add(GetTVDetailsEvent(id!))
-        ..add(GetTVRecommendationEvent(id!)),
+        ..add(GetTVDetailsEvent(id))
+        ..add(GetTVRecommendationEvent(id)),
       lazy: false,
       child: const Scaffold(
         body: TVDetailContent(),
@@ -47,12 +46,11 @@ class TVDetailContent extends StatelessWidget {
             );
           case RequestState.loaded:
             return CustomScrollView(
-              physics: BouncingScrollPhysics(),
               key: const Key('tvDetailScrollView'),
               slivers: [
                 SliverAppBar(
                   pinned: true,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                  expandedHeight: 250.0,
                   flexibleSpace: FlexibleSpaceBar(
                     background: FadeIn(
                       duration: const Duration(milliseconds: 500),
@@ -93,7 +91,11 @@ class TVDetailContent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(state.tvDetail!.name,
-                              style: Theme.of(context).textTheme.titleLarge),
+                              style: GoogleFonts.poppins(
+                                fontSize: 23,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 1.2,
+                              )),
                           const SizedBox(height: 8.0),
                           Row(
                             children: [
@@ -103,12 +105,15 @@ class TVDetailContent extends StatelessWidget {
                                   horizontal: 8.0,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Theme.of(context).shadowColor,
+                                  color: Colors.grey[800],
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
                                 child: Text(
                                   state.tvDetail!.firstAirDate.split('-')[0],
-                                  style: Theme.of(context).textTheme.titleSmall,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 16.0),
@@ -116,47 +121,61 @@ class TVDetailContent extends StatelessWidget {
                                 children: [
                                   const Icon(
                                     Icons.star,
+                                    color: Colors.amber,
                                     size: 20.0,
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
                                     (state.tvDetail!.voteAverage / 2)
                                         .toStringAsFixed(1),
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall,
-                                  ),
-                                  const SizedBox(width: 8.0),
-                                  Icon(
-                                    SimpleIcons.hbo,
-                                    size: 25.0,
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 1.2,
+                                    ),
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
-                                    '${(state.tvDetail!.voteAverage).toStringAsFixed(1)}',
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall,
+                                    '(${state.tvDetail!.voteAverage})',
+                                    style: const TextStyle(
+                                      fontSize: 1.0,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 1.2,
+                                    ),
                                   ),
                                 ],
                               ),
-                              // const SizedBox(width: 24.0),
-                              // Icon(
-                              //   FeatherIcons.clock,
-                              //   size: 25.0,
-                              // ),
-                              // const SizedBox(width: 4.0),
-                              // Text(
-                              //   _showDuration(state.tvDetail!.runtime),
-                              //   style: Theme.of(context).textTheme.titleSmall,
-                              // ),
+                              const SizedBox(width: 16.0),
+                              Text(
+                                _showDuration(state.tvDetail!.id),
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 1.2,
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 20.0),
-                          Text(state.tvDetail!.overview,
-                              style: Theme.of(context).textTheme.displaySmall),
-                          // const SizedBox(height: 8.0),
+                          Text(
+                            state.tvDetail!.overview,
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
                           // Text(
-                          //     '${AppString.genres}: ${_showGenres(state.tvDetail!.genres)}',
-                          //     style: Theme.of(context).textTheme.titleMedium),
+                          //   '${AppString.genres}: ${_showGenres(state.tvDetail!.genres)}',
+                          //   style: const TextStyle(
+                          //     color: Colors.white70,
+                          //     fontSize: 12.0,
+                          //     fontWeight: FontWeight.w500,
+                          //     letterSpacing: 1.2,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -168,9 +187,13 @@ class TVDetailContent extends StatelessWidget {
                     child: FadeInUp(
                       from: 20,
                       duration: const Duration(milliseconds: 500),
-                      child: Text(
+                      child: const Text(
                         AppString.moreLikeThis,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                        ),
                       ),
                     ),
                   ),
@@ -189,7 +212,7 @@ class TVDetailContent extends StatelessWidget {
     );
   }
 
-  // String _showGenres(List<GenresMovie> genres) {
+  // String _showGenres(List<GenresTV> genres) {
   //   String result = '';
   //   for (var genre in genres) {
   //     result += '${genre.name}, ';
