@@ -1,49 +1,59 @@
-// import 'package:flutter/material.dart';
+import 'package:film_gamed_app/features/app/presentation/pages/home_screen.dart';
+import 'package:film_gamed_app/features/app/presentation/pages/settings_screen.dart';
+import 'package:film_gamed_app/features/movie/domain/entities/movie.dart';
+import 'package:film_gamed_app/features/movie/domain/entities/movie_details.dart';
+import 'package:film_gamed_app/features/movie/presentation/pages/movie_detail_screen.dart';
+import 'package:film_gamed_app/features/movie/presentation/pages/movies_screen.dart';
+import 'package:film_gamed_app/features/tv/presentation/pages/tv_detail_screen.dart';
+import 'package:film_gamed_app/features/tv/presentation/pages/tv_screen.dart';
+import 'package:flutter/material.dart';
 
-// class Routes {
-//   static const String splashRoute = "/";
-//   static const String loginRoute = "/login";
-//   static const String registerRoute = "/register";
-//   static const String forgotPasswordRoute = "/forgotPassword";
-//   static const String onBoardingRoute = "/onBoarding";
-//   static const String mainRoute = "/main";
-//   static const String storeDetailsRoute = "/storeDetails";
-// }
+import '../utils/app_string.dart';
 
-// class RouteGenerator {
-//   static Route<dynamic> getRoute(RouteSettings settings) {
-//     switch (settings.name) {
-//       case Routes.splashRoute:
-//         return MaterialPageRoute(builder: (_) => const SplashView());
-//       case Routes.loginRoute:
-//         initLoginModule();
-//         return MaterialPageRoute(builder: (_) => const LoginView());
-//       case Routes.onBoardingRoute:
-//         return MaterialPageRoute(builder: (_) => const OnBoardingView());
-//       case Routes.registerRoute:
-//         initRegisterModule();
-//         return MaterialPageRoute(builder: (_) => const RegisterView());
-//       case Routes.forgotPasswordRoute:
-//         initForgotPasswordModule();
-//         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
-//       case Routes.mainRoute:
-//         initHomeModule();
-//         return MaterialPageRoute(builder: (_) => const MainView());
-//       case Routes.storeDetailsRoute:
-//         initStoreDetailsModule();
-//         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
-//       default:
-//         return unDefinedRoute();
-//     }
-//   }
+class Routes {
+  static const String homeRoute = "/";
+  static const String movieRoute = "/movie";
+  static const String movieDetailRoute = "/movieDetail";
+  static const String tvRoute = "/tv";
+  static const String tvDetailRoute = "/tvDetail";
+  static const String settingsRoute = "/settings";
+}
 
-//   static Route<dynamic> unDefinedRoute() {
-//     return MaterialPageRoute(
-//         builder: (_) => Scaffold(
-//               appBar: AppBar(
-//                 title: Text(AppStrings.noRouteFound.tr()),
-//               ),
-//               body: Center(child: Text(AppStrings.noRouteFound.tr())),
-//             ));
-//   }
-// }
+class RouteGenerator {
+  static Route<dynamic> getRoute(RouteSettings settings) {
+    final arguments = settings.arguments;
+
+    switch (settings.name) {
+      case Routes.homeRoute:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case Routes.movieRoute:
+        return MaterialPageRoute(builder: (_) => const MoviesScreen());
+      case Routes.movieDetailRoute:
+        final movieIdArgs = settings.arguments as int;
+        return MaterialPageRoute(
+            builder: (_) => MovieDetailScreen(id: movieIdArgs));
+      case Routes.tvRoute:
+        return MaterialPageRoute(builder: (_) => const TVsScreen());
+      case Routes.tvDetailRoute:
+        final tvIdArgs = settings.arguments as int;
+        return MaterialPageRoute(
+            builder: (_) => TVDetailScreen(
+                  id: tvIdArgs,
+                ));
+      case Routes.settingsRoute:
+        return MaterialPageRoute(builder: (_) => const SettingsScreen());
+      default:
+        return unDefinedRoute();
+    }
+  }
+
+  static Route<dynamic> unDefinedRoute() {
+    return MaterialPageRoute(
+        builder: (_) => Scaffold(
+              appBar: AppBar(
+                title: Text(AppString.noRouteFound),
+              ),
+              body: Center(child: Text(AppString.noRouteFound)),
+            ));
+  }
+}

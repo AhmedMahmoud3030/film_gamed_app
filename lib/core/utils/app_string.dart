@@ -1,8 +1,11 @@
 class AppString {
-  static const appName = "Movies App";
-  static const popular = "Popular";
-  static const seeMore = "See More";
-  static const topRated = "Top Rated";
-  static const genres = "Genres";
-  static const moreLikeThis = "More like this";
+  static const String appName = "Movies App";
+  static const String popular = "Popular";
+  static const String seeMore = "See More";
+  static const String topRated = "Top Rated";
+  static const String genres = "Genres";
+  static const String moreLikeThis = "More like this";
+  static const String nowPlaying = "Now Playing";
+  static const String onTheAir = "On The Air";
+  static const String noRouteFound = "No Route Found";
 }

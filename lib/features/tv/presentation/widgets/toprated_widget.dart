@@ -1,3 +1,5 @@
+import 'package:film_gamed_app/features/tv/presentation/manager/tv_bloc.dart';
+import 'package:film_gamed_app/features/tv/presentation/manager/tv_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -6,8 +8,6 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/network/api_constance.dart';
 import '../../../../core/utils/enums.dart';
-import '../manager/tv_bloc.dart';
-import '../manager/tv_state.dart';
 
 class TopRatedWidget extends StatelessWidget {
   const TopRatedWidget({
@@ -25,18 +25,16 @@ class TopRatedWidget extends StatelessWidget {
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: Container(
-                height: 170,
+                height: MediaQuery.of(context).size.height * 0.3,
               ),
             );
-          case RequestState.error:
-            return Text(state.popularMessage);
-
           case RequestState.loaded:
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: SizedBox(
-                height: 170.0,
+                height: MediaQuery.of(context).size.height * 0.3,
                 child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -53,17 +51,19 @@ class TopRatedWidget extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(8.0)),
                           child: CachedNetworkImage(
-                            width: 120.0,
+                            width: MediaQuery.of(context).size.height * 0.2,
                             fit: BoxFit.cover,
                             imageUrl: ApiConstance.imageUrl(movie.backdropPath),
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey[850]!,
-                              highlightColor: Colors.grey[800]!,
+                              baseColor: Theme.of(context).shadowColor,
+                              highlightColor: Theme.of(context).highlightColor,
                               child: Container(
-                                height: 170.0,
-                                width: 120.0,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                                width: MediaQuery.of(context).size.height * 0.2,
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
@@ -78,6 +78,8 @@ class TopRatedWidget extends StatelessWidget {
                 ),
               ),
             );
+          case RequestState.error:
+            return Text(state.topRatedMessage);
         }
       },
     );

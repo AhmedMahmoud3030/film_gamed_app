@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'package:film_gamed_app/core/resources/routes_manger.dart';
+import 'package:film_gamed_app/core/utils/app_string.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -28,7 +30,7 @@ class NowPlayingWidget extends StatelessWidget {
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: Container(
-                height: 400,
+                height: MediaQuery.of(context).size.height,
               ),
             );
           case RequestState.loaded:
@@ -36,7 +38,7 @@ class NowPlayingWidget extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               child: CarouselSlider(
                 options: CarouselOptions(
-                  height: 400.0,
+                  height: MediaQuery.of(context).size.height * 0.89,
                   viewportFraction: 1.0,
                   onPageChanged: (index, reason) {},
                 ),
@@ -45,25 +47,28 @@ class NowPlayingWidget extends StatelessWidget {
                     return GestureDetector(
                       key: const Key('openMovieMinimalDetail'),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  MovieDetailScreen(id: item.id),
-                            ));
+                        Navigator.pushNamed(
+                          context,
+                          Routes.movieDetailRoute,
+                          arguments: item.id,
+                        );
                       },
                       child: Stack(
                         children: [
                           ShaderMask(
                             shaderCallback: (rect) {
-                              return const LinearGradient(
+                              return LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
                                   // fromLTRB
+                                  // Theme.of(context).primaryColor,
+                                  // Theme.of(context).scaffoldBackgroundColor,
+                                  // Theme.of(context).scaffoldBackgroundColor,
+                                  // Theme.of(context).primaryColor,
                                   Colors.transparent,
-                                  Colors.black,
-                                  Colors.black,
+                                  Colors.pink,
+                                  Colors.pink,
                                   Colors.transparent,
                                 ],
                                 stops: [0, 0.3, 0.5, 1],
@@ -73,7 +78,7 @@ class NowPlayingWidget extends StatelessWidget {
                             },
                             blendMode: BlendMode.dstIn,
                             child: CachedNetworkImage(
-                              height: 560.0,
+                              height: MediaQuery.of(context).size.height * 0.89,
                               imageUrl:
                                   ApiConstance.imageUrl(item.backdropPath),
                               fit: BoxFit.cover,
@@ -89,17 +94,18 @@ class NowPlayingWidget extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.circle,
-                                        color: Colors.redAccent,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
                                         size: 16.0,
                                       ),
                                       const SizedBox(width: 4.0),
                                       Text(
-                                        'Now Playing'.toUpperCase(),
-                                        style: const TextStyle(
-                                          fontSize: 16.0,
-                                        ),
+                                        AppString.nowPlaying.toUpperCase(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge,
                                       ),
                                     ],
                                   ),
@@ -109,9 +115,8 @@ class NowPlayingWidget extends StatelessWidget {
                                   child: Text(
                                     item.title,
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                    ),
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
                                 ),
                               ],

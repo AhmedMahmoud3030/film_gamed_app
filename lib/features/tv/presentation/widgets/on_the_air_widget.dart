@@ -1,14 +1,15 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/network/api_constance.dart';
+import '../../../../core/resources/routes_manger.dart';
+import '../../../../core/utils/app_string.dart';
 import '../../../../core/utils/enums.dart';
 import '../manager/tv_bloc.dart';
 import '../manager/tv_state.dart';
-import '../pages/tv_detail_screen.dart';
 
 class OnTheAirWidget extends StatelessWidget {
   const OnTheAirWidget({
@@ -26,7 +27,7 @@ class OnTheAirWidget extends StatelessWidget {
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: Container(
-                height: 400,
+                height: MediaQuery.of(context).size.height,
               ),
             );
           case RequestState.loaded:
@@ -34,34 +35,37 @@ class OnTheAirWidget extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               child: CarouselSlider(
                 options: CarouselOptions(
-                  height: 400.0,
+                  height: MediaQuery.of(context).size.height * 0.89,
                   viewportFraction: 1.0,
                   onPageChanged: (index, reason) {},
                 ),
                 items: state.onTheAirTVs.map(
                   (item) {
                     return GestureDetector(
-                      key: const Key('openMovieMinimalDetail'),
+                      key: const Key('openTvMinimalDetail'),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  TVDetailScreen(id: item.id),
-                            ));
+                        Navigator.pushNamed(
+                          context,
+                          Routes.tvDetailRoute,
+                          arguments: item.id,
+                        );
                       },
                       child: Stack(
                         children: [
                           ShaderMask(
                             shaderCallback: (rect) {
-                              return const LinearGradient(
+                              return LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [
                                   // fromLTRB
+                                  // Theme.of(context).primaryColor,
+                                  // Theme.of(context).scaffoldBackgroundColor,
+                                  // Theme.of(context).scaffoldBackgroundColor,
+                                  // Theme.of(context).primaryColor,
                                   Colors.transparent,
-                                  Colors.black,
-                                  Colors.black,
+                                  Colors.pink,
+                                  Colors.pink,
                                   Colors.transparent,
                                 ],
                                 stops: [0, 0.3, 0.5, 1],
@@ -71,10 +75,10 @@ class OnTheAirWidget extends StatelessWidget {
                             },
                             blendMode: BlendMode.dstIn,
                             child: CachedNetworkImage(
-                              height: 560.0,
+                              height: MediaQuery.of(context).size.height * 0.89,
                               imageUrl:
                                   ApiConstance.imageUrl(item.backdropPath),
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Align(
@@ -87,17 +91,18 @@ class OnTheAirWidget extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.circle,
-                                        color: Colors.redAccent,
+                                        color:
+                                            Theme.of(context).primaryColorLight,
                                         size: 16.0,
                                       ),
                                       const SizedBox(width: 4.0),
                                       Text(
-                                        'Now Playing'.toUpperCase(),
-                                        style: const TextStyle(
-                                          fontSize: 16.0,
-                                        ),
+                                        AppString.onTheAir.toUpperCase(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge,
                                       ),
                                     ],
                                   ),
@@ -107,9 +112,8 @@ class OnTheAirWidget extends StatelessWidget {
                                   child: Text(
                                     item.title,
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                    ),
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
                                 ),
                               ],

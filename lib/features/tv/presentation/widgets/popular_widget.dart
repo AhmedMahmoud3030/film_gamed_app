@@ -25,15 +25,16 @@ class PopularWidget extends StatelessWidget {
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: Container(
-                height: 170,
+                height: MediaQuery.of(context).size.height * 0.3,
               ),
             );
           case RequestState.loaded:
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: SizedBox(
-                height: 170.0,
+                height: MediaQuery.of(context).size.height * 0.3,
                 child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -50,17 +51,19 @@ class PopularWidget extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(8.0)),
                           child: CachedNetworkImage(
-                            width: 120.0,
+                            width: MediaQuery.of(context).size.height * 0.2,
                             fit: BoxFit.cover,
                             imageUrl: ApiConstance.imageUrl(movie.backdropPath),
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey[850]!,
-                              highlightColor: Colors.grey[800]!,
+                              baseColor: Theme.of(context).shadowColor,
+                              highlightColor: Theme.of(context).highlightColor,
                               child: Container(
-                                height: 170.0,
-                                width: 120.0,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.3,
+                                width: MediaQuery.of(context).size.height * 0.2,
                                 decoration: BoxDecoration(
-                                  color: Colors.black,
+                                  color:
+                                      Theme.of(context).scaffoldBackgroundColor,
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),

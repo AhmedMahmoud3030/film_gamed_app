@@ -2,8 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:simple_icons/simple_icons.dart';
 
 import '../../../../core/network/api_constance.dart';
 import '../../../../core/services/services_locator.dart';
@@ -15,14 +17,14 @@ import '../manager/movie_detail_bloc.dart';
 class MovieDetailScreen extends StatelessWidget {
   final int id;
 
-  const MovieDetailScreen({Key? key, required this.id}) : super(key: key);
+  const MovieDetailScreen({required this.id});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<MovieDetailBloc>()
-        ..add(GetMovieDetailsEvent(id))
-        ..add(GetMovieRecommendationEvent(id)),
+        ..add(GetMovieDetailsEvent(id!))
+        ..add(GetMovieRecommendationEvent(id!)),
       lazy: false,
       child: const Scaffold(
         body: MovieDetailContent(),
@@ -47,11 +49,12 @@ class MovieDetailContent extends StatelessWidget {
             );
           case RequestState.loaded:
             return CustomScrollView(
+              physics: BouncingScrollPhysics(),
               key: const Key('movieDetailScrollView'),
               slivers: [
                 SliverAppBar(
                   pinned: true,
-                  expandedHeight: 250.0,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
                   flexibleSpace: FlexibleSpaceBar(
                     background: FadeIn(
                       duration: const Duration(milliseconds: 500),
@@ -92,11 +95,7 @@ class MovieDetailContent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(state.movieDetail!.title,
-                              style: GoogleFonts.poppins(
-                                fontSize: 23,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 1.2,
-                              )),
+                              style: Theme.of(context).textTheme.titleLarge),
                           const SizedBox(height: 8.0),
                           Row(
                             children: [
@@ -106,15 +105,12 @@ class MovieDetailContent extends StatelessWidget {
                                   horizontal: 8.0,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[800],
+                                  color: Theme.of(context).shadowColor,
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
                                 child: Text(
                                   state.movieDetail!.releaseDate.split('-')[0],
-                                  style: const TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                  style: Theme.of(context).textTheme.titleSmall,
                                 ),
                               ),
                               const SizedBox(width: 16.0),
@@ -122,61 +118,47 @@ class MovieDetailContent extends StatelessWidget {
                                 children: [
                                   const Icon(
                                     Icons.star,
-                                    color: Colors.amber,
                                     size: 20.0,
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
                                     (state.movieDetail!.voteAverage / 2)
                                         .toStringAsFixed(1),
-                                    style: const TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 1.2,
-                                    ),
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
+                                  ),
+                                  const SizedBox(width: 8.0),
+                                  Icon(
+                                    SimpleIcons.hbo,
+                                    size: 25.0,
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
-                                    '(${state.movieDetail!.voteAverage})',
-                                    style: const TextStyle(
-                                      fontSize: 1.0,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 1.2,
-                                    ),
+                                    '${(state.movieDetail!.voteAverage).toStringAsFixed(1)}',
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
                                   ),
                                 ],
                               ),
-                              const SizedBox(width: 16.0),
+                              const SizedBox(width: 24.0),
+                              Icon(
+                                FeatherIcons.clock,
+                                size: 25.0,
+                              ),
+                              const SizedBox(width: 4.0),
                               Text(
                                 _showDuration(state.movieDetail!.runtime),
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 1.2,
-                                ),
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
                             ],
                           ),
                           const SizedBox(height: 20.0),
-                          Text(
-                            state.movieDetail!.overview,
-                            style: const TextStyle(
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
+                          Text(state.movieDetail!.overview,
+                              style: Theme.of(context).textTheme.displaySmall),
                           const SizedBox(height: 8.0),
                           Text(
-                            '${AppString.genres}: ${_showGenres(state.movieDetail!.genres)}',
-                            style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
+                              '${AppString.genres}: ${_showGenres(state.movieDetail!.genres)}',
+                              style: Theme.of(context).textTheme.titleMedium),
                         ],
                       ),
                     ),
@@ -188,13 +170,9 @@ class MovieDetailContent extends StatelessWidget {
                     child: FadeInUp(
                       from: 20,
                       duration: const Duration(milliseconds: 500),
-                      child: const Text(
+                      child: Text(
                         AppString.moreLikeThis,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 1.2,
-                        ),
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ),
                   ),
