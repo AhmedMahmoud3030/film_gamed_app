@@ -2,6 +2,7 @@
 
 import 'package:film_gamed_app/core/resources/routes_manger.dart';
 import 'package:film_gamed_app/core/utils/app_string.dart';
+import 'package:film_gamed_app/features/movie/presentation/manager/movies_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,8 +12,6 @@ import 'package:flutter/material.dart';
 import '../../../../core/network/api_constance.dart';
 import '../../../../core/utils/enums.dart';
 import '../manager/movies_bloc.dart';
-import '../manager/movies_state.dart';
-import '../pages/movie_detail_screen.dart';
 
 class NowPlayingWidget extends StatelessWidget {
   const NowPlayingWidget({

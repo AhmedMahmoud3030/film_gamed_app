@@ -49,10 +49,10 @@ ThemeData getApplicationTheme() {
         color: ColorManager.font,
         fontSize: FontSize.s14,
       ),
-      // headlineLarge: getSemiBoldStyle(
-      //   color: ColorManager.font,
-      //   fontSize: FontSize.s16,
-      // ),
+      headlineLarge: getSemiBoldStyle(
+        color: ColorManager.font,
+        fontSize: FontSize.s24,
+      ),
       // headlineMedium: getRegularStyle(
       //   color: ColorManager.font,
       //   fontSize: FontSize.s14,
@@ -184,36 +184,40 @@ ThemeData getApplicationDarkTheme() {
         color: ColorManager.fontDark,
         fontSize: FontSize.s14,
       ),
-      // headlineLarge: getSemiBoldStyle(
-      //   color: ColorManager.font,
-      //   fontSize: FontSize.s16,
-      // ),
-      // headlineMedium: getRegularStyle(
-      //   color: ColorManager.font,
-      //   fontSize: FontSize.s14,
-      // ),
-      // bodyLarge: getRegularStyle(
-      //   color: ColorManager.font,
-      // ),
-      // bodySmall: getRegularStyle(
-      //   color: ColorManager.font,
-      // ),
-      // bodyMedium: getRegularStyle(
-      //   color: ColorManager.font,
-      //   fontSize: FontSize.s12,
-      // ),
-      // labelSmall: getBoldStyle(
-      //   color: ColorManager.font,
-      //   fontSize: FontSize.s12,
-      // ),
+      headlineLarge: getSemiBoldStyle(
+        color: ColorManager.fontDark,
+        fontSize: FontSize.s24,
+      ),
     ),
+    // cardTheme: CardTheme(
+    //     color: ColorManager.grey2,
+    //     shadowColor: ColorManager.grey1,
+    //     elevation: AppSize.s4),
+    // headlineLarge: getSemiBoldStyle(
+    //   color: ColorManager.font,
+    //   fontSize: FontSize.s16,
+    // ),
+    // headlineMedium: getRegularStyle(
+    //   color: ColorManager.font,
+    //   fontSize: FontSize.s14,
+    // ),
+    // bodyLarge: getRegularStyle(
+    //   color: ColorManager.font,
+    // ),
+    // bodySmall: getRegularStyle(
+    //   color: ColorManager.font,
+    // ),
+    // bodyMedium: getRegularStyle(
+    //   color: ColorManager.font,
+    //   fontSize: FontSize.s12,
+    // ),
+    // labelSmall: getBoldStyle(
+    //   color: ColorManager.font,
+    //   fontSize: FontSize.s12,
+    // ),
 
     // // ripple effect color
     // // cardView theme
-    // cardTheme: CardTheme(
-    //     color: ColorManager.white,
-    //     shadowColor: ColorManager.grey1,
-    //     elevation: AppSize.s4),
     // // app bar theme
     // appBarTheme: AppBarTheme(
     //     centerTitle: true,

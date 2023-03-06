@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+// ignore: unused_import
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -25,16 +27,18 @@ class TopRatedWidget extends StatelessWidget {
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.3,
+                height: 170,
               ),
             );
+          case RequestState.error:
+            return Text(state.popularMessage);
+
           case RequestState.loaded:
             return FadeIn(
               duration: const Duration(milliseconds: 500),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.3,
+                height: 170.0,
                 child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -51,19 +55,17 @@ class TopRatedWidget extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(8.0)),
                           child: CachedNetworkImage(
-                            width: MediaQuery.of(context).size.height * 0.2,
+                            width: 120.0,
                             fit: BoxFit.cover,
                             imageUrl: ApiConstance.imageUrl(movie.backdropPath),
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Theme.of(context).shadowColor,
-                              highlightColor: Theme.of(context).highlightColor,
+                              baseColor: Colors.grey[850]!,
+                              highlightColor: Colors.grey[800]!,
                               child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
-                                width: MediaQuery.of(context).size.height * 0.2,
+                                height: 170.0,
+                                width: 120.0,
                                 decoration: BoxDecoration(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
+                                  color: Colors.black,
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
@@ -78,8 +80,6 @@ class TopRatedWidget extends StatelessWidget {
                 ),
               ),
             );
-          case RequestState.error:
-            return Text(state.topRatedMessage);
         }
       },
     );

@@ -1,17 +1,21 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:film_gamed_app/core/resources/color_manger.dart';
+import 'package:film_gamed_app/features/app/presentation/manager/application_event.dart';
+import 'package:film_gamed_app/features/app/presentation/manager/cubit/app_cubit.dart';
+import 'package:film_gamed_app/features/movie/presentation/manager/movies_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
-import '../manager/app_cubit.dart';
+import '../manager/application_bloc.dart';
+import '../manager/application_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AppCubit, AppState>(
+    return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         return Scaffold(
           bottomNavigationBar: CurvedNavigationBar(
@@ -30,13 +34,14 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
             index: 0,
-            onTap: (value) =>
-                BlocProvider.of<AppCubit>(context).setScreenIndex(value),
+            onTap: (value) {
+              BlocProvider.of<AppBloc>(context).add(GetAppScreenEvent());
+            },
             animationDuration: const Duration(
               milliseconds: 500,
             ),
           ),
-          body: state.screens,
+          body: state.screen,
         );
       },
     );

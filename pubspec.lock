@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  animated_theme_switcher:
+    dependency: "direct main"
+    description:
+      name: animated_theme_switcher
+      sha256: "80f1c6fc21b5d1f4ad4edcec009663eb1f2a6e68312a871054d7cd9381d5ea1c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
   args:
     dependency: transitive
     description:
@@ -456,6 +464,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliding_switch:
+    dependency: "direct main"
+    description:
+      name: sliding_switch
+      sha256: "049a9582c9bc30913ce4e34eb26063b468acf5fe47a053636bbf950e5b180dc0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   source_span:
     dependency: transitive
     description:
