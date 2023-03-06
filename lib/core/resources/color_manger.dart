@@ -8,7 +8,7 @@ class ColorManager {
   static Color background = const Color(0xff09041D); // color with 80% opacity
   static Color hint = Color(0xFFE3DF0F); // color with 80% opacity
   static Color grey1 = const Color(0xff707070);
-  static Color grey2 = const Color(0xff797979);
+  static Color grey2 = Color(0xFFC6C4C4);
   static Color error = const Color(0xffe61f34);
 
   //? new colors LIGHT
@@ -19,6 +19,6 @@ class ColorManager {
   static Color fontDark = const Color(0xff09041D); // color with 80% opacity
   static Color hintDark = Color(0xFFE3DF0F); // color with 80% opacity
   static Color grey1Dark = const Color(0xff707070);
-  static Color grey2Dark = const Color(0xff797979);
+  static Color grey2Dark = Color(0xFFC6C4C4);
   static Color errorDark = const Color(0xffe61f34); // red color
 }

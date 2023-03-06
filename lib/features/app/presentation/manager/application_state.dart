@@ -5,28 +5,26 @@ import 'package:film_gamed_app/features/movie/presentation/pages/movies_screen.d
 import 'package:film_gamed_app/features/tv/presentation/pages/tv_screen.dart';
 import 'package:flutter/material.dart';
 
-class AppState extends Equatable {
-  const AppState({
-    this.screenIndex = 0,
-    this.screen = const MoviesScreen(),
+class AppState {
+  final bool isDarkTheme;
+  final Widget screen;
+  final String logoImage;
+
+  AppState({
+    required this.isDarkTheme,
+    required this.screen,
+    required this.logoImage,
   });
 
-  final int screenIndex;
-  final Widget screen;
-
   AppState copyWith({
-    int? screenIndex,
+    bool? isDarkTheme,
     Widget? screen,
+    String? logoImage,
   }) {
     return AppState(
-      screenIndex: screenIndex ?? this.screenIndex,
+      isDarkTheme: isDarkTheme ?? this.isDarkTheme,
       screen: screen ?? this.screen,
+      logoImage: logoImage ?? this.logoImage,
     );
   }
-
-  @override
-  List<Object?> get props => [
-        screenIndex,
-        screen,
-      ];
 }

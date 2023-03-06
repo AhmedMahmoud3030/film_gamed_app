@@ -27,6 +27,10 @@ ThemeData getApplicationTheme() {
     appBarTheme: AppBarTheme(
       backgroundColor: ColorManager.background,
     ),
+    // cardTheme: CardTheme(
+    //     color: ColorManager.background,
+    //     shadowColor: ColorManager.grey1,
+    //     elevation: AppSize.s40),
 
     textTheme: TextTheme(
       titleMedium: getMediumStyle(
@@ -49,10 +53,10 @@ ThemeData getApplicationTheme() {
         color: ColorManager.font,
         fontSize: FontSize.s14,
       ),
-      // headlineLarge: getSemiBoldStyle(
-      //   color: ColorManager.font,
-      //   fontSize: FontSize.s16,
-      // ),
+      headlineLarge: getSemiBoldStyle(
+        color: ColorManager.font,
+        fontSize: FontSize.s24,
+      ),
       // headlineMedium: getRegularStyle(
       //   color: ColorManager.font,
       //   fontSize: FontSize.s14,
@@ -75,10 +79,6 @@ ThemeData getApplicationTheme() {
 
     // // ripple effect color
     // // cardView theme
-    // cardTheme: CardTheme(
-    //     color: ColorManager.white,
-    //     shadowColor: ColorManager.grey1,
-    //     elevation: AppSize.s4),
     // // app bar theme
     // appBarTheme: AppBarTheme(
     //     centerTitle: true,
@@ -144,6 +144,7 @@ ThemeData getApplicationDarkTheme() {
   return ThemeData(
     // main colors
     splashColor: ColorManager.secondaryDark,
+
     scaffoldBackgroundColor: ColorManager.backgroundDark,
     primaryColor: ColorManager.primaryDark,
     primaryColorLight: ColorManager.secondaryDark,
@@ -162,6 +163,12 @@ ThemeData getApplicationDarkTheme() {
     appBarTheme: AppBarTheme(
       backgroundColor: ColorManager.backgroundDark,
     ),
+
+    // cardTheme: CardTheme(
+    //     color: ColorManager.backgroundDark,
+    //     shadowColor: ColorManager.font,
+    //     surfaceTintColor: ColorManager.error,
+    //     elevation: AppSize.s40),
 
     textTheme: TextTheme(
       titleMedium: getMediumStyle(
@@ -183,6 +190,10 @@ ThemeData getApplicationDarkTheme() {
       displaySmall: getLightStyle(
         color: ColorManager.fontDark,
         fontSize: FontSize.s14,
+      ),
+      headlineLarge: getSemiBoldStyle(
+        color: ColorManager.fontDark,
+        fontSize: FontSize.s24,
       ),
       // headlineLarge: getSemiBoldStyle(
       //   color: ColorManager.font,
