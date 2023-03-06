@@ -1,7 +1,6 @@
 name: film_gamed_app
 description: Movie App
 
-
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -14,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+ 
 
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
@@ -29,10 +28,8 @@ dependencies:
   shimmer: ^2.0.0
   curved_navigation_bar: ^1.0.3
   flutter_feather_icons: ^2.0.0+1
-  flutter_svg: ^2.0.2
   simple_icons: ^7.10.0
-  sliding_switch: ^1.1.0
-  animated_theme_switcher: ^2.0.7
+  flutter_svg: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -59,7 +56,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

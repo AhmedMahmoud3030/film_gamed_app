@@ -1,9 +1,6 @@
-import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:film_gamed_app/core/resources/routes_manger.dart';
 import 'package:film_gamed_app/core/services/services_locator.dart';
-import 'package:film_gamed_app/features/app/presentation/manager/application_bloc.dart';
-import 'package:film_gamed_app/features/app/presentation/manager/application_event.dart';
-import 'package:film_gamed_app/features/app/presentation/manager/cubit/app_cubit.dart';
+import 'package:film_gamed_app/features/app/presentation/manager/app_cubit.dart';
 import 'package:film_gamed_app/features/app/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/resources/theme_manger.dart';
 import 'core/utils/app_string.dart';
 import 'features/tv/presentation/pages/tv_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   ServiceLocator().init();
@@ -24,18 +20,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppBloc(),
-      child: ThemeProvider(
-        initTheme: getApplicationTheme(),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: AppString.appName,
-          theme: getApplicationTheme(),
-          darkTheme: getApplicationDarkTheme(),
-          //themeMode: ThemeMode.system,
-          onGenerateRoute: RouteGenerator.getRoute,
-          initialRoute: Routes.homeRoute,
-        ),
+      create: (context) => AppCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: AppString.appName,
+        theme: getApplicationTheme(),
+        darkTheme: getApplicationDarkTheme(),
+        themeMode: ThemeMode.system,
+        onGenerateRoute: RouteGenerator.getRoute,
+        initialRoute: Routes.homeRoute,
       ),
     );
   }
