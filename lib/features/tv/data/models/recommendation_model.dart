@@ -8,7 +8,7 @@ class RecommendationTVModel extends RecommendationTV {
 
   factory RecommendationTVModel.fromJson(Map<String, dynamic> json) =>
       RecommendationTVModel(
-        json['backdrop_path'] ?? '/ta17TltHGdZ5PZz6oUD3N5BRurb',
+        json['backdrop_path'] ?? json['poster_path'],
         id: json['id'],
       );
 }

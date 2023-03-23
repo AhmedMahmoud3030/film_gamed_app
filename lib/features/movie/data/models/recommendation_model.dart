@@ -8,7 +8,7 @@ class RecommendationMovieModel extends RecommendationMovie {
 
   factory RecommendationMovieModel.fromJson(Map<String, dynamic> json) =>
       RecommendationMovieModel(
-        json['backdrop_path'] ?? '/ta17TltHGdZ5PZz6oUD3N5BRurb',
+        json['backdrop_path'] ?? json['poster_path'],
         id: json['id'],
       );
 }

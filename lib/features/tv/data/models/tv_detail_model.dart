@@ -11,7 +11,7 @@ class TVDetailModel extends TVDetail {
     required super.overview,
   });
   factory TVDetailModel.fromJson(Map<String, dynamic> json) => TVDetailModel(
-        backdropPath: json['poster_path'],
+        backdropPath: json['backdrop_path'] ?? json['poster_path'],
         firstAirDate: json['first_air_date'],
         // genres: List<GenresTVModel>.from((json['genres'] as List).map(
         //   (e) => GenresTVModel.fromJson(e),

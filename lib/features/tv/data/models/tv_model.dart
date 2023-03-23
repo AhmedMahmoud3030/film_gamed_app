@@ -14,7 +14,7 @@ class TVModel extends TV {
   factory TVModel.fromJson(Map<String, dynamic> json) => TVModel(
         id: json['id'],
         title: json['name'],
-        backdropPath: json['poster_path'],
+        backdropPath: json['backdrop_path'] ?? json['poster_path'],
         genreIds: List<int>.from(json['genre_ids'].map((e) => e)),
         overview: json['overview'],
         voteAverage: json['vote_average'].toDouble(),

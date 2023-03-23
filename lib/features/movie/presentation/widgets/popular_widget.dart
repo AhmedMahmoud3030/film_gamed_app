@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/network/api_constance.dart';
+import '../../../../core/resources/routes_manger.dart';
 import '../../../../core/utils/enums.dart';
 import '../manager/movies_bloc.dart';
 import '../manager/movies_state.dart';
@@ -45,7 +46,11 @@ class PopularWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 8.0),
                       child: InkWell(
                         onTap: () {
-                          /// TODO : NAVIGATE TO  MOVIE DETAILS
+                          Navigator.pushNamed(
+                            context,
+                            Routes.movieDetailRoute,
+                            arguments: movie.id,
+                          );
                         },
                         child: ClipRRect(
                           borderRadius:

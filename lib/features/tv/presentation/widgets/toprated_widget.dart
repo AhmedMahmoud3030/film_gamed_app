@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/network/api_constance.dart';
+import '../../../../core/resources/routes_manger.dart';
 import '../../../../core/utils/enums.dart';
 
 class TopRatedWidget extends StatelessWidget {
@@ -45,7 +46,11 @@ class TopRatedWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 8.0),
                       child: InkWell(
                         onTap: () {
-                          /// TODO : NAVIGATE TO  MOVIE DETAILS
+                          Navigator.pushNamed(
+                            context,
+                            Routes.tvDetailRoute,
+                            arguments: movie.id,
+                          );
                         },
                         child: ClipRRect(
                           borderRadius:
