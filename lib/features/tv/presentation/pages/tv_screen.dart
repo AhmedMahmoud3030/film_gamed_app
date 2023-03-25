@@ -20,12 +20,12 @@ class TVsScreen extends StatelessWidget {
         ..add(GetPopularTVsEvent())
         ..add(GetTopRatedTVsEvent()),
       child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        key: Key('movieScrollView'),
+        physics: const BouncingScrollPhysics(),
+        key: const Key('movieScrollView'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            OnTheAirWidget(),
+            const OnTheAirWidget(),
             Container(
               margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
               child: Row(
@@ -47,7 +47,7 @@ class TVsScreen extends StatelessWidget {
                             AppString.seeMore,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
-                          Icon(Icons.arrow_forward_ios, size: 16.0)
+                          const Icon(Icons.arrow_forward_ios, size: 16.0)
                         ],
                       ),
                     ),
@@ -82,7 +82,7 @@ class TVsScreen extends StatelessWidget {
                             AppString.seeMore,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.arrow_forward_ios,
                             size: 16.0,
                           )

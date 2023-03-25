@@ -1,5 +1,4 @@
 import 'package:film_gamed_app/core/resources/styles_manger.dart';
-import 'package:film_gamed_app/core/resources/values_manger.dart';
 import 'package:flutter/material.dart';
 
 import 'color_manger.dart';

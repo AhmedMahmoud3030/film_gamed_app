@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film_gamed_app/features/tv/presentation/manager/tv_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:simple_icons/simple_icons.dart';
 
@@ -15,14 +14,14 @@ import '../../../../core/utils/enums.dart';
 class TVDetailScreen extends StatelessWidget {
   final int id;
 
-  const TVDetailScreen({required this.id});
+  const TVDetailScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<TVDetailBloc>()
-        ..add(GetTVDetailsEvent(id!))
-        ..add(GetTVRecommendationEvent(id!)),
+        ..add(GetTVDetailsEvent(id))
+        ..add(GetTVRecommendationEvent(id)),
       lazy: false,
       child: const Scaffold(
         body: TVDetailContent(),
@@ -47,7 +46,7 @@ class TVDetailContent extends StatelessWidget {
             );
           case RequestState.loaded:
             return CustomScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               key: const Key('tvDetailScrollView'),
               slivers: [
                 SliverAppBar(
@@ -126,13 +125,14 @@ class TVDetailContent extends StatelessWidget {
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
                                   const SizedBox(width: 8.0),
-                                  Icon(
+                                  const Icon(
                                     SimpleIcons.hbo,
                                     size: 25.0,
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
-                                    '${(state.tvDetail!.voteAverage).toStringAsFixed(1)}',
+                                    (state.tvDetail!.voteAverage)
+                                        .toStringAsFixed(1),
                                     style:
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
@@ -201,17 +201,6 @@ class TVDetailContent extends StatelessWidget {
 
   //   return result.substring(0, result.length - 2);
   // }
-
-  String _showDuration(int runtime) {
-    final int hours = runtime ~/ 60;
-    final int minutes = runtime % 60;
-
-    if (hours > 0) {
-      return '${hours}h ${minutes}m';
-    } else {
-      return '${minutes}m';
-    }
-  }
 
   Widget _showRecommendations() {
     return BlocBuilder<TVDetailBloc, TVDetailState>(

@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:simple_icons/simple_icons.dart';
 
@@ -17,14 +16,14 @@ import '../manager/movie_detail_bloc.dart';
 class MovieDetailScreen extends StatelessWidget {
   final int id;
 
-  const MovieDetailScreen({required this.id});
+  const MovieDetailScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<MovieDetailBloc>()
-        ..add(GetMovieDetailsEvent(id!))
-        ..add(GetMovieRecommendationEvent(id!)),
+        ..add(GetMovieDetailsEvent(id))
+        ..add(GetMovieRecommendationEvent(id)),
       lazy: false,
       child: const Scaffold(
         body: MovieDetailContent(),
@@ -49,7 +48,7 @@ class MovieDetailContent extends StatelessWidget {
             );
           case RequestState.loaded:
             return CustomScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               key: const Key('movieDetailScrollView'),
               slivers: [
                 SliverAppBar(
@@ -128,20 +127,21 @@ class MovieDetailContent extends StatelessWidget {
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
                                   const SizedBox(width: 8.0),
-                                  Icon(
+                                  const Icon(
                                     SimpleIcons.hbo,
                                     size: 25.0,
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
-                                    '${(state.movieDetail!.voteAverage).toStringAsFixed(1)}',
+                                    (state.movieDetail!.voteAverage)
+                                        .toStringAsFixed(1),
                                     style:
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
                                 ],
                               ),
                               const SizedBox(width: 24.0),
-                              Icon(
+                              const Icon(
                                 FeatherIcons.clock,
                                 size: 25.0,
                               ),

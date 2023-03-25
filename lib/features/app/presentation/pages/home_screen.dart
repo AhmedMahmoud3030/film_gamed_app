@@ -1,8 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:film_gamed_app/core/resources/color_manger.dart';
 import 'package:film_gamed_app/features/app/presentation/manager/application_bloc.dart';
 import 'package:film_gamed_app/features/app/presentation/manager/application_event.dart';
-import 'package:film_gamed_app/features/app/presentation/pages/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';

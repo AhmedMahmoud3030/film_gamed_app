@@ -1,7 +1,5 @@
 import 'package:film_gamed_app/features/app/presentation/pages/home_screen.dart';
 import 'package:film_gamed_app/features/app/presentation/pages/settings_screen.dart';
-import 'package:film_gamed_app/features/movie/domain/entities/movie.dart';
-import 'package:film_gamed_app/features/movie/domain/entities/movie_details.dart';
 import 'package:film_gamed_app/features/movie/presentation/pages/movie_detail_screen.dart';
 import 'package:film_gamed_app/features/movie/presentation/pages/movies_screen.dart';
 import 'package:film_gamed_app/features/tv/presentation/pages/tv_detail_screen.dart';
@@ -21,8 +19,6 @@ class Routes {
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
-    final arguments = settings.arguments;
-
     switch (settings.name) {
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
@@ -51,9 +47,9 @@ class RouteGenerator {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
               appBar: AppBar(
-                title: Text(AppString.noRouteFound),
+                title: const Text(AppString.noRouteFound),
               ),
-              body: Center(child: Text(AppString.noRouteFound)),
+              body: const Center(child: Text(AppString.noRouteFound)),
             ));
   }
 }

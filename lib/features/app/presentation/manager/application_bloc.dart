@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:film_gamed_app/core/usecase/base_usecase.dart';
 import 'package:film_gamed_app/core/utils/app_string.dart';
-import 'package:film_gamed_app/core/utils/enums.dart';
 import 'package:film_gamed_app/features/app/presentation/pages/settings_screen.dart';
 import 'package:film_gamed_app/features/movie/presentation/pages/movies_screen.dart';
 import 'package:film_gamed_app/features/tv/presentation/pages/tv_screen.dart';
@@ -15,7 +13,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc()
       : super(AppState(
             isDarkTheme: false,
-            screen: MoviesScreen(),
+            screen: const MoviesScreen(),
             logoImage: AppString.logoLight)) {
     on<ChangeAppThemeEvent>(_changeAppTheme);
 
@@ -91,11 +89,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   FutureOr<void> _changeAppScreen(
       ChangeAppScreenEvent event, Emitter<AppState> emit) {
     if (event.index == 0) {
-      emit(state.copyWith(screen: MoviesScreen()));
+      emit(state.copyWith(screen: const MoviesScreen()));
     } else if (event.index == 1) {
-      emit(state.copyWith(screen: TVsScreen()));
+      emit(state.copyWith(screen: const TVsScreen()));
     } else if (event.index == 2) {
-      emit(state.copyWith(screen: SettingsScreen()));
+      emit(state.copyWith(screen: const SettingsScreen()));
     }
   }
 }

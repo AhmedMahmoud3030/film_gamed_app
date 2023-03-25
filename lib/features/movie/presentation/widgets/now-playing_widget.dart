@@ -1,18 +1,17 @@
 // ignore_for_file: file_names
 
-import 'package:film_gamed_app/core/resources/routes_manger.dart';
-import 'package:film_gamed_app/core/utils/app_string.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:film_gamed_app/core/resources/routes_manger.dart';
+import 'package:film_gamed_app/core/utils/app_string.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/network/api_constance.dart';
 import '../../../../core/utils/enums.dart';
 import '../manager/movies_bloc.dart';
 import '../manager/movies_state.dart';
-import '../pages/movie_detail_screen.dart';
 
 class NowPlayingWidget extends StatelessWidget {
   const NowPlayingWidget({
@@ -57,7 +56,7 @@ class NowPlayingWidget extends StatelessWidget {
                         children: [
                           ShaderMask(
                             shaderCallback: (rect) {
-                              return LinearGradient(
+                              return const LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [

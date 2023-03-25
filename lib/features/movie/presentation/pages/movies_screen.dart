@@ -1,7 +1,6 @@
 import 'package:film_gamed_app/core/utils/app_string.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/services_locator.dart';
 import '../manager/movies_bloc.dart';
@@ -21,12 +20,12 @@ class MoviesScreen extends StatelessWidget {
         ..add(GetPopularMoviesEvent())
         ..add(GetTopRatedMoviesEvent()),
       child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        key: Key('movieScrollView'),
+        physics: const BouncingScrollPhysics(),
+        key: const Key('movieScrollView'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            NowPlayingWidget(),
+            const NowPlayingWidget(),
             Container(
               margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
               child: Row(
@@ -48,7 +47,7 @@ class MoviesScreen extends StatelessWidget {
                             AppString.seeMore,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
-                          Icon(Icons.arrow_forward_ios, size: 16.0)
+                          const Icon(Icons.arrow_forward_ios, size: 16.0)
                         ],
                       ),
                     ),
@@ -83,7 +82,7 @@ class MoviesScreen extends StatelessWidget {
                             AppString.seeMore,
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.arrow_forward_ios,
                             size: 16.0,
                           )
