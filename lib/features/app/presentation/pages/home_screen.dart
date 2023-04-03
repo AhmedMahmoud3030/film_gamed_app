@@ -1,11 +1,9 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:film_gamed_app/features/app/presentation/manager/application_bloc.dart';
-import 'package:film_gamed_app/features/app/presentation/manager/application_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 import '../manager/application_state.dart';
+import '../widgets/MyDrawer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,8 +13,9 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
         return Scaffold(
-          bottomNavigationBar: CurvedNavigationBar(
-            height: MediaQuery.of(context).size.height * 0.11,
+          drawer: const MyDrawer(),
+          /*bottomNavigationBar: CurvedNavigationBar(
+            height: MediaQuery.of(context).size.height * 0.10,
             color: Theme.of(context).scaffoldBackgroundColor,
             backgroundColor: Theme.of(context).splashColor,
             items: const [
@@ -37,7 +36,7 @@ class HomeScreen extends StatelessWidget {
             animationDuration: const Duration(
               milliseconds: 500,
             ),
-          ),
+          ),*/
           body: state.screen,
         );
       },

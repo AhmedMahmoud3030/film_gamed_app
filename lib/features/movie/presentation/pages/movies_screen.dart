@@ -2,6 +2,7 @@ import 'package:film_gamed_app/core/utils/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/resources/routes_manger.dart';
 import '../../../../core/services/services_locator.dart';
 import '../manager/movies_bloc.dart';
 import '../manager/movies_event.dart';
@@ -38,6 +39,12 @@ class MoviesScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       /// TODO : NAVIGATION TO POPULAR SCREEN
+
+                      Navigator.pushNamed(
+                        context,
+                        Routes.moviesList,
+                        arguments: 'POPULAR',
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

@@ -6,6 +6,7 @@ import 'package:film_gamed_app/features/tv/presentation/pages/tv_detail_screen.d
 import 'package:film_gamed_app/features/tv/presentation/pages/tv_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/movie/presentation/pages/movies_list.dart';
 import '../utils/app_string.dart';
 
 class Routes {
@@ -15,6 +16,8 @@ class Routes {
   static const String tvRoute = "/tv";
   static const String tvDetailRoute = "/tvDetail";
   static const String settingsRoute = "/settings";
+  static const String moviesList = "/moviesList";
+  static const String tvsList = "/tvsList";
 }
 
 class RouteGenerator {
@@ -22,6 +25,13 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.homeRoute:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case Routes.moviesList:
+        final movieArgs = settings.arguments as String;
+
+        return MaterialPageRoute(
+            builder: (_) => MovieList(
+                  args: movieArgs,
+                ));
       case Routes.movieRoute:
         return MaterialPageRoute(builder: (_) => const MoviesScreen());
       case Routes.movieDetailRoute:
