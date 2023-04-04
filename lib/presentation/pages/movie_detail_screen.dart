@@ -1,8 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film_gamed_app/features/tv/presentation/manager/tv_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:simple_icons/simple_icons.dart';
 
@@ -10,36 +10,38 @@ import '../../../../core/network/api_constance.dart';
 import '../../../../core/services/services_locator.dart';
 import '../../../../core/utils/app_string.dart';
 import '../../../../core/utils/enums.dart';
+import '../../domain/entities/generes.dart';
+import '../manager/movie_detail_bloc.dart';
 
-class TVDetailScreen extends StatelessWidget {
+class MovieDetailScreen extends StatelessWidget {
   final int id;
 
-  const TVDetailScreen({super.key, required this.id});
+  const MovieDetailScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<TVDetailBloc>()
-        ..add(GetTVDetailsEvent(id))
-        ..add(GetTVRecommendationEvent(id)),
+      create: (context) => sl<MovieDetailBloc>()
+        ..add(GetMovieDetailsEvent(id))
+        ..add(GetMovieRecommendationEvent(id)),
       lazy: false,
       child: const Scaffold(
-        body: TVDetailContent(),
+        body: MovieDetailContent(),
       ),
     );
   }
 }
 
-class TVDetailContent extends StatelessWidget {
-  const TVDetailContent({
+class MovieDetailContent extends StatelessWidget {
+  const MovieDetailContent({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TVDetailBloc, TVDetailState>(
+    return BlocBuilder<MovieDetailBloc, MovieDetailState>(
       builder: (context, state) {
-        switch (state.tvDetailState) {
+        switch (state.movieDetailState) {
           case RequestState.loading:
             return const Center(
               child: CircularProgressIndicator(),
@@ -47,7 +49,7 @@ class TVDetailContent extends StatelessWidget {
           case RequestState.loaded:
             return CustomScrollView(
               physics: const BouncingScrollPhysics(),
-              key: const Key('tvDetailScrollView'),
+              key: const Key('movieDetailScrollView'),
               slivers: [
                 SliverAppBar(
                   pinned: true,
@@ -75,7 +77,7 @@ class TVDetailContent extends StatelessWidget {
                         child: CachedNetworkImage(
                           width: MediaQuery.of(context).size.width,
                           imageUrl: ApiConstance.imageUrl(
-                              state.tvDetail!.backdropPath),
+                              state.movieDetail!.backdropPath),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -91,7 +93,7 @@ class TVDetailContent extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(state.tvDetail!.name,
+                          Text(state.movieDetail!.title,
                               style: Theme.of(context).textTheme.titleLarge),
                           const SizedBox(height: 8.0),
                           Row(
@@ -106,7 +108,7 @@ class TVDetailContent extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
                                 child: Text(
-                                  state.tvDetail!.firstAirDate.split('-')[0],
+                                  state.movieDetail!.releaseDate.split('-')[0],
                                   style: Theme.of(context).textTheme.titleSmall,
                                 ),
                               ),
@@ -119,7 +121,7 @@ class TVDetailContent extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
-                                    (state.tvDetail!.voteAverage / 2)
+                                    (state.movieDetail!.voteAverage / 2)
                                         .toStringAsFixed(1),
                                     style:
                                         Theme.of(context).textTheme.titleSmall,
@@ -131,32 +133,32 @@ class TVDetailContent extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 4.0),
                                   Text(
-                                    (state.tvDetail!.voteAverage)
+                                    (state.movieDetail!.voteAverage)
                                         .toStringAsFixed(1),
                                     style:
                                         Theme.of(context).textTheme.titleSmall,
                                   ),
                                 ],
                               ),
-                              // const SizedBox(width: 24.0),
-                              // Icon(
-                              //   FeatherIcons.clock,
-                              //   size: 25.0,
-                              // ),
-                              // const SizedBox(width: 4.0),
-                              // Text(
-                              //   _showDuration(state.tvDetail!.runtime),
-                              //   style: Theme.of(context).textTheme.titleSmall,
-                              // ),
+                              const SizedBox(width: 24.0),
+                              const Icon(
+                                FeatherIcons.clock,
+                                size: 25.0,
+                              ),
+                              const SizedBox(width: 4.0),
+                              Text(
+                                _showDuration(state.movieDetail!.runtime),
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
                             ],
                           ),
                           const SizedBox(height: 20.0),
-                          Text(state.tvDetail!.overview,
+                          Text(state.movieDetail!.overview,
                               style: Theme.of(context).textTheme.displaySmall),
-                          // const SizedBox(height: 8.0),
-                          // Text(
-                          //     '${AppString.genres}: ${_showGenres(state.tvDetail!.genres)}',
-                          //     style: Theme.of(context).textTheme.titleMedium),
+                          const SizedBox(height: 8.0),
+                          Text(
+                              '${AppString.genres}: ${_showGenres(state.movieDetail!.genres)}',
+                              style: Theme.of(context).textTheme.titleMedium),
                         ],
                       ),
                     ),
@@ -183,27 +185,38 @@ class TVDetailContent extends StatelessWidget {
               ],
             );
           case RequestState.error:
-            return Center(child: Text(state.tvDetailMessage));
+            return Center(child: Text(state.movieDetailMessage));
         }
       },
     );
   }
 
-  // String _showGenres(List<GenresMovie> genres) {
-  //   String result = '';
-  //   for (var genre in genres) {
-  //     result += '${genre.name}, ';
-  //   }
+  String _showGenres(List<Genres> genres) {
+    String result = '';
+    for (var genre in genres) {
+      result += '${genre.name}, ';
+    }
 
-  //   if (result.isEmpty) {
-  //     return result;
-  //   }
+    if (result.isEmpty) {
+      return result;
+    }
 
-  //   return result.substring(0, result.length - 2);
-  // }
+    return result.substring(0, result.length - 2);
+  }
+
+  String _showDuration(int runtime) {
+    final int hours = runtime ~/ 60;
+    final int minutes = runtime % 60;
+
+    if (hours > 0) {
+      return '${hours}h ${minutes}m';
+    } else {
+      return '${minutes}m';
+    }
+  }
 
   Widget _showRecommendations() {
-    return BlocBuilder<TVDetailBloc, TVDetailState>(
+    return BlocBuilder<MovieDetailBloc, MovieDetailState>(
       builder: (context, state) => SliverGrid(
         delegate: SliverChildBuilderDelegate(
           (context, index) {

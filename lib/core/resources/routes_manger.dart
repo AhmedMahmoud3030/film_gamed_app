@@ -1,12 +1,12 @@
-import 'package:film_gamed_app/features/app/presentation/pages/home_screen.dart';
-import 'package:film_gamed_app/features/app/presentation/pages/settings_screen.dart';
-import 'package:film_gamed_app/features/movie/presentation/pages/movie_detail_screen.dart';
-import 'package:film_gamed_app/features/movie/presentation/pages/movies_screen.dart';
-import 'package:film_gamed_app/features/tv/presentation/pages/tv_detail_screen.dart';
-import 'package:film_gamed_app/features/tv/presentation/pages/tv_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/movie/presentation/pages/movies_list.dart';
+import '../../presentation/pages/home_screen.dart';
+import '../../presentation/pages/movie_detail_screen.dart';
+import '../../presentation/pages/movies_list.dart';
+import '../../presentation/pages/movies_screen.dart';
+import '../../presentation/pages/settings_screen.dart';
+import '../../presentation/pages/tv_detail_screen.dart';
+import '../../presentation/pages/tv_screen.dart';
 import '../utils/app_string.dart';
 
 class Routes {

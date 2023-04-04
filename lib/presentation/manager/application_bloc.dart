@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:film_gamed_app/core/utils/app_string.dart';
-import 'package:film_gamed_app/features/app/presentation/pages/settings_screen.dart';
-import 'package:film_gamed_app/features/movie/presentation/pages/movies_screen.dart';
-import 'package:film_gamed_app/features/tv/presentation/pages/tv_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../pages/movies_screen.dart';
+import '../pages/settings_screen.dart';
+import '../pages/tv_screen.dart';
 import 'application_event.dart';
 import 'application_state.dart';
 

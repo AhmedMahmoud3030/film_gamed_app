@@ -1,12 +1,12 @@
 import 'package:film_gamed_app/core/resources/routes_manger.dart';
 import 'package:film_gamed_app/core/services/services_locator.dart';
-import 'package:film_gamed_app/features/app/presentation/manager/application_bloc.dart';
+import 'package:film_gamed_app/presentation/manager/application_bloc.dart';
+import 'package:film_gamed_app/presentation/manager/application_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/resources/theme_manger.dart';
 import 'core/utils/app_string.dart';
-import 'features/app/presentation/manager/application_state.dart';
 
 void main() {
   ServiceLocator().init();

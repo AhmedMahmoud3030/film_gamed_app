@@ -1,6 +1,6 @@
 import '../../domain/entities/generes.dart';
 
-class GenresTVModel extends GenresTV {
+class GenresTVModel extends Genres {
   const GenresTVModel({required super.name, required super.id});
 
   factory GenresTVModel.fromJson(Map<String, dynamic> json) => GenresTVModel(
