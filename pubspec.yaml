@@ -33,6 +33,7 @@ dependencies:
   sliding_switch: ^1.1.0
   toggle_switch: ^2.0.1
   animated_theme_switcher: ^2.0.7
+  flutter_conditional_rendering: ^2.0.0
 
 dev_dependencies:
   flutter_test:
