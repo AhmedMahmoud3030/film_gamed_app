@@ -1,3 +1,8 @@
+import 'package:film_gamed_app/features/search/data/datasources/search_data_remote_datasource.dart';
+import 'package:film_gamed_app/features/search/data/repositories/search_data_repository_impl.dart';
+import 'package:film_gamed_app/features/search/domain/repositories/search_repository.dart';
+import 'package:film_gamed_app/features/search/domain/usecases/get_search_data.dart';
+import 'package:film_gamed_app/features/search/presentation/bloc/search_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/movie/data/data_sources/movie_remote_data_source.dart';
@@ -20,7 +25,6 @@ import '../../features/tv/domain/use_cases/get_top_rated_tv_usecase.dart';
 import '../../features/tv/domain/use_cases/get_tv_details_usecase.dart';
 import '../../features/tv/presentation/manager/tv_bloc.dart';
 import '../../features/tv/presentation/manager/tv_detail_bloc.dart';
-
 
 final sl = GetIt.instance;
 
@@ -64,5 +68,20 @@ class ServiceLocator {
     //* DataSource
     sl.registerLazySingleton<BaseTVRemoteDataSource>(
         () => TVRemoteDataSource());
+
+    //?Search
+    //*Bloc
+    sl.registerFactory(() => SearchBloc(sl()));
+
+    //* UseCases
+    sl.registerLazySingleton(() => GetSearchDataUseCase(sl()));
+
+    //* Repository
+    sl.registerLazySingleton<SearchRepository>(
+        () => SearchRepositoryImpl(searchRemoteDataSource: sl()));
+
+    //* DataSource
+    sl.registerLazySingleton<SearchRemoteDataSource>(
+        () => SearchRemoteDataSourceImpl());
   }
 }

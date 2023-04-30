@@ -1,3 +1,4 @@
+import 'package:film_gamed_app/core/resources/routes_manger.dart';
 import 'package:film_gamed_app/features/app/presentation/manager/application_bloc.dart';
 import 'package:film_gamed_app/features/app/presentation/manager/application_event.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,12 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const SearchFieldDrawer(),
+                  GestureDetector(
+                      onTap: () => Navigator.pushNamed(
+                            context,
+                            Routes.searchRoute,
+                          ),
+                      child: const SearchFieldDrawer()),
                   const SizedBox(height: 12),
                   MenuItem(
                     text: 'Movies',
@@ -147,9 +153,41 @@ class SearchFieldDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const color = Colors.white;
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            width: 1,
+            color: Colors.white,
+          )),
+      child: Card(
+        color: Colors.transparent,
+        elevation: 0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Search',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-    return TextField(
+
+/**
+ * 
+ * TextField(
       style: const TextStyle(color: color, fontSize: 14),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -172,5 +210,4 @@ class SearchFieldDrawer extends StatelessWidget {
         ),
       ),
     );
-  }
-}
+ */

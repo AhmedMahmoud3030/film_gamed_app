@@ -1,5 +1,6 @@
 import 'package:film_gamed_app/features/movie/domain/entities/movie.dart';
 import 'package:film_gamed_app/features/search/presentation/pages/search_screen.dart';
+import 'package:film_gamed_app/features/tv/domain/entities/tv.dart';
 import 'package:film_gamed_app/features/watch_list/presentation/pages/watch_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ import '../../features/movie/presentation/pages/movies_list.dart';
 import '../../features/movie/presentation/pages/movies_screen.dart';
 import '../../features/tv/presentation/pages/tv_detail_screen.dart';
 import '../../features/tv/presentation/pages/tv_screen.dart';
+import '../../features/tv/presentation/pages/tvs_list.dart';
 import '../utils/app_string.dart';
 
 class Routes {
@@ -19,11 +21,11 @@ class Routes {
   static const String tvRoute = "/tv";
   static const String tvDetailRoute = "/tvDetail";
   static const String settingsRoute = "/settings";
-  static const String moviesList = "/moviesList";
   static const String searchRoute = "/search";
   static const String watchListRoute = "/watchList";
 
   static const String tvsList = "/tvsList";
+  static const String moviesList = "/moviesList";
 }
 
 class RouteGenerator {
@@ -40,6 +42,13 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => MovieList(
             moviesArgs: moviesArgs,
+          ),
+        );
+      case Routes.tvsList:
+        final tvArgs = settings.arguments as TvArgs;
+        return MaterialPageRoute(
+          builder: (_) => TVList(
+            tvArgs: tvArgs,
           ),
         );
       case Routes.movieRoute:
@@ -76,4 +85,11 @@ class MovieArgs {
   final List<Movie> movies;
 
   MovieArgs(this.title, this.movies);
+}
+
+class TvArgs {
+  final String title;
+  final List<TV> tvs;
+
+  TvArgs(this.title, this.tvs);
 }
